@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Utils for filter fields
+ */
 public class ExtractorUtils {
     public static Object extractValue(Field field, Object object) {
         try {

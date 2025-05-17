@@ -2,7 +2,7 @@ package org.fs.comparator.comparators.object.type;
 
 import org.fs.comparator.comparators.object.Terminatable;
 
-public class DifferentNamesComparator implements Terminatable {
+final public class DifferentNamesComparator implements Terminatable {
     private final Object left;
     private final Object right;
 

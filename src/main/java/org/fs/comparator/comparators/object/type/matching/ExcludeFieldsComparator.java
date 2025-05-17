@@ -1,12 +1,15 @@
 package org.fs.comparator.comparators.object.type.matching;
 
+import org.fs.comparator.comparators.exception.ComparatorSettingsException;
 import org.fs.comparator.comparators.object.Terminatable;
 import org.fs.comparator.comparators.util.ExtractorUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.stream.Stream;
 
+/**
+ * Compare fields excludes some of them
+ */
 public class ExcludeFieldsComparator extends FieldsComparator implements Terminatable {
     private final Object left;
     private final Object right;
@@ -14,23 +17,13 @@ public class ExcludeFieldsComparator extends FieldsComparator implements Termina
     private final Set<String> excludeFields;
 
     public ExcludeFieldsComparator(Object left, Object right, String... fields) {
-        this.left = Objects.requireNonNull(left, "Left object cannot be null");
-        this.right = Objects.requireNonNull(right, "Right object cannot be null");
-        this.excludeFields = fields == null
-                ? Collections.emptySet()
-                : new LinkedHashSet<>(Arrays.asList(fields));
-    }
-
-    public ExcludeFieldsComparator excludeFields(String... fields) {
-        if (fields == null || fields.length == 0) {
-            return this;
+        if(fields == null || fields.length == 0 || Arrays.stream(fields).anyMatch(String::isBlank)) {
+            throw new ComparatorSettingsException("Exclude fields must not be null, empty, or blank");
         }
 
-        return new ExcludeFieldsComparator(
-                left,
-                right,
-                Stream.concat(excludeFields.stream(), Stream.of(fields)).toArray(String[]::new)
-        );
+        this.left = left;
+        this.right = right;
+        this.excludeFields = Set.of(fields);
     }
 
     @Override
