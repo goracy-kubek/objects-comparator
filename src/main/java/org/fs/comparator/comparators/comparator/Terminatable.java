@@ -1,4 +1,4 @@
-package org.fs.comparator.comparators.object;
+package org.fs.comparator.comparators.comparator;
 
 /**
  * Represents an object that can terminate a process.

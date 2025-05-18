@@ -1,6 +1,6 @@
-package org.fs.comparator.comparators.object.type;
+package org.fs.comparator.comparators.comparator.types.different;
 
-import org.fs.comparator.comparators.object.Terminatable;
+import org.fs.comparator.comparators.comparator.Terminatable;
 
 final public class DifferentNamesComparator implements Terminatable {
     private final Object left;

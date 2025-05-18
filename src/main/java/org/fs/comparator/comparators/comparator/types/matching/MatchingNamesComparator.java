@@ -1,9 +1,6 @@
-package org.fs.comparator.comparators.object.type;
+package org.fs.comparator.comparators.comparator.types.matching;
 
-import org.fs.comparator.comparators.object.Terminatable;
-import org.fs.comparator.comparators.object.type.matching.DefaultFieldsComparator;
-import org.fs.comparator.comparators.object.type.matching.ExcludeFieldsComparator;
-import org.fs.comparator.comparators.object.type.matching.OnlyFieldsComparator;
+import org.fs.comparator.comparators.comparator.Terminatable;
 
 /**
  * Compare objects by its fields names

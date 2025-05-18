@@ -1,4 +1,4 @@
-package org.fs.comparator.comparators.object.type.matching;
+package org.fs.comparator.comparators.comparator.types.matching;
 
 import org.fs.comparator.comparators.util.ExtractorUtils;
 

@@ -1,6 +1,6 @@
-package org.fs.comparator.comparators.object.type.matching;
+package org.fs.comparator.comparators.comparator.types.matching;
 
-import org.fs.comparator.comparators.object.Terminatable;
+import org.fs.comparator.comparators.comparator.Terminatable;
 import org.fs.comparator.comparators.util.ExtractorUtils;
 
 final public class DefaultFieldsComparator extends FieldsComparator implements Terminatable {

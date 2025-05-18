@@ -1,7 +1,7 @@
-package org.fs.comparator.comparators.object.type.matching;
+package org.fs.comparator.comparators.comparator.types.matching;
 
 import org.fs.comparator.comparators.exception.ComparatorSettingsException;
-import org.fs.comparator.comparators.object.Terminatable;
+import org.fs.comparator.comparators.comparator.Terminatable;
 import org.fs.comparator.comparators.util.ExtractorUtils;
 
 import java.lang.reflect.Field;

@@ -1,7 +1,7 @@
-package org.fs.comparator.comparators.object;
+package org.fs.comparator.comparators.comparator;
 
-import org.fs.comparator.comparators.object.type.DifferentNamesComparator;
-import org.fs.comparator.comparators.object.type.MatchingNamesComparator;
+import org.fs.comparator.comparators.comparator.types.different.DifferentNamesComparator;
+import org.fs.comparator.comparators.comparator.types.matching.MatchingNamesComparator;
 
 final public class ObjectsComparator {
     private final Object left;

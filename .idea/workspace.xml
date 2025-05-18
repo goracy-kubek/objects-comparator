@@ -4,25 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e87e0dc-2e7b-4ed0-8579-28a46106a678" name="Changes" comment="Parametrized tests">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/DefaultFieldsComparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorUtilsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/argument/ComparatorArguments.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/argument/ComparatorExceptionsNullBlankEmptyArguments.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/argument/ExcludeFieldsArguments.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/argument/OnlyFieldsArguments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2e87e0dc-2e7b-4ed0-8579-28a46106a678" name="Changes" comment="Exception checking">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/ComparatorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/ComparatorUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/ObjectsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/ObjectsComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/Terminatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/Terminatable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/DifferentNamesComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/DifferentNamesComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/MatchingNamesComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/MatchingNamesComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/ExcludeFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/ExcludeFieldsComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/FieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/FieldsComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/OnlyFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/OnlyFieldsComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ExcludeFieldsComparatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/ObjectsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/Terminatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/Terminatable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/DifferentNamesComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentNamesComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/MatchingNamesComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingNamesComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/DefaultFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/DefaultFieldsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/ExcludeFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/FieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/object/type/matching/OnlyFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/OnlyFieldsComparator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,22 +150,20 @@
       <option name="project" value="LOCAL" />
       <updated>1747514126567</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Exception checking">
+      <option name="closed" value="true" />
+      <created>1747520569452</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1747520569452</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Parametrized tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Parametrized tests" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Exception checking" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exception checking" />
   </component>
 </project>
