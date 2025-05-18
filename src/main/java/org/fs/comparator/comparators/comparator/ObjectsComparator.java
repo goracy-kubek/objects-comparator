@@ -1,9 +1,10 @@
 package org.fs.comparator.comparators.comparator;
 
-import org.fs.comparator.comparators.comparator.types.different.DifferentNamesComparator;
-import org.fs.comparator.comparators.comparator.types.matching.MatchingNamesComparator;
+import org.fs.comparator.comparators.comparator.types.different.DifferentFieldsComparator;
+import org.fs.comparator.comparators.comparator.types.matching.DefaultFieldsComparator;
+import org.fs.comparator.comparators.comparator.types.matching.MatchingFieldsComparator;
 
-final public class ObjectsComparator {
+final public class ObjectsComparator implements Terminatable {
     private final Object left;
     private final Object right;
 
@@ -16,11 +17,16 @@ final public class ObjectsComparator {
         this.right = right;
     }
 
-    public MatchingNamesComparator compareMatchingNames() {
-        return new MatchingNamesComparator(left, right);
+    public MatchingFieldsComparator compareMatchingNames() {
+        return new MatchingFieldsComparator(left, right);
     }
 
-    public DifferentNamesComparator compareDifferentNames() {
-        return new DifferentNamesComparator(left, right);
+    public DifferentFieldsComparator compareDifferentNames() {
+        return new DifferentFieldsComparator(left, right);
+    }
+
+    @Override
+    public boolean compare() {
+        return new DefaultFieldsComparator(left, right).compare();
     }
 }

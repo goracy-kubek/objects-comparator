@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Utils for filter fields
@@ -21,19 +22,20 @@ public class ExtractorUtils {
         }
     }
 
-    public static List<Field> extractFields(Object object) {
-        return Arrays.stream(object.getClass().getDeclaredFields()).toList();
+    public static Set<Field> extractFields(Object object) {
+        return Arrays.stream(object.getClass().getDeclaredFields())
+                .collect(Collectors.toSet());
     }
 
-    public static List<Field> extractFieldsExclude(Object object, Set<String> exclude) {
+    public static Set<Field> extractFieldsExclude(Object object, Set<String> exclude) {
         return Arrays.stream(object.getClass().getDeclaredFields())
                 .filter(e -> !exclude.contains(e.getName()))
-                .toList();
+                .collect(Collectors.toSet());
     }
 
-    public static List<Field> extractFieldsOnly(Object object, Set<String> only) {
+    public static Set<Field> extractFieldsOnly(Object object, Set<String> only) {
         return Arrays.stream(object.getClass().getDeclaredFields())
                 .filter(e -> only.contains(e.getName()))
-                .toList();
+                .collect(Collectors.toSet());
     }
 }

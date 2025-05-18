@@ -1,11 +1,9 @@
 package org.fs.comparator.comparators.comparator.types.matching;
 
-import org.fs.comparator.comparators.comparator.Terminatable;
-
 /**
  * Compare objects by its fields names
  */
-final public class MatchingNamesComparator implements Terminatable {
+final public class MatchingFieldsComparator {
     private final Object left;
     private final Object right;
 
@@ -14,7 +12,7 @@ final public class MatchingNamesComparator implements Terminatable {
      * @param left Left object for comparing
      * @param right Right object for comparing
      */
-    public MatchingNamesComparator(Object left, Object right) {
+    public MatchingFieldsComparator(Object left, Object right) {
         this.left = left;
         this.right = right;
     }
@@ -35,10 +33,5 @@ final public class MatchingNamesComparator implements Terminatable {
      */
     public ExcludeFieldsComparator excludeFields(String... fields) {
         return new ExcludeFieldsComparator(left, right, fields);
-    }
-
-    @Override
-    public boolean compare() {
-        return new DefaultFieldsComparator(left, right).compare();
     }
 }

@@ -3,7 +3,7 @@ package org.fs.comparator.comparators.comparator.types.matching;
 import org.fs.comparator.comparators.util.ExtractorUtils;
 
 import java.lang.reflect.Field;
-import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -21,8 +21,8 @@ public abstract class FieldsComparator {
      * @return Result of comparing
      */
     protected boolean fieldsCompare(
-            List<Field> leftFields,
-            List<Field> rightFields,
+            Set<Field> leftFields,
+            Set<Field> rightFields,
             Object leftObject,
             Object rightObject
     ) {

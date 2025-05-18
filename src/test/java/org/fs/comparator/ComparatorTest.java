@@ -16,9 +16,7 @@ public class ComparatorTest {
     @DisplayName("Simple comparator")
     @ArgumentsSource(ComparatorArguments.class)
     void test1(boolean expected, Object left, Object right) {
-        boolean actual = ComparatorUtils.compareObjects(left, right)
-                .compareMatchingNames()
-                .compare();
+        boolean actual = ComparatorUtils.compareObjects(left, right).compare();
 
         assertThat(actual).isEqualTo(expected);
     }

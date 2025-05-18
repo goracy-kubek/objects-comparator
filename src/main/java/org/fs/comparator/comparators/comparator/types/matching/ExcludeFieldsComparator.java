@@ -28,8 +28,8 @@ public class ExcludeFieldsComparator extends FieldsComparator implements Termina
 
     @Override
     public boolean compare() {
-        List<Field> lf = ExtractorUtils.extractFieldsExclude(left, excludeFields);
-        List<Field> rf = ExtractorUtils.extractFieldsExclude(right, excludeFields);
+        Set<Field> lf = ExtractorUtils.extractFieldsExclude(left, excludeFields);
+        Set<Field> rf = ExtractorUtils.extractFieldsExclude(right, excludeFields);
 
         return super.fieldsCompare(lf, rf, left, right);
     }
