@@ -1,5 +1,7 @@
-package org.fs.comparator.comparators.comparator.types.matching;
+package org.fs.comparator.comparators.comparator.types.comparator;
 
+import org.fs.comparator.comparators.comparator.types.FieldsComparator;
+import org.fs.comparator.comparators.comparator.types.container.RecordFieldsContainer;
 import org.fs.comparator.comparators.exception.ComparatorSettingsException;
 import org.fs.comparator.comparators.comparator.Terminatable;
 import org.fs.comparator.comparators.util.ExtractorUtils;
@@ -9,7 +11,7 @@ import java.util.*;
 /**
  * Compares only fields in settings
  */
-public class OnlyFieldsComparator extends FieldsComparator implements Terminatable {
+public final class OnlyFieldsComparator extends FieldsComparator implements Terminatable {
     private final Object left;
     private final Object right;
 
@@ -30,6 +32,9 @@ public class OnlyFieldsComparator extends FieldsComparator implements Terminatab
         var lf = ExtractorUtils.extractFieldsOnly(left, onlyFields);
         var rf = ExtractorUtils.extractFieldsOnly(right, onlyFields);
 
-        return fieldsCompare(lf, rf, left, right);
+        return fieldsCompare(
+            new RecordFieldsContainer(lf, left),
+            new RecordFieldsContainer(rf, right)
+        );
     }
 }

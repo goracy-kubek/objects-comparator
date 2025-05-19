@@ -1,5 +1,7 @@
-package org.fs.comparator.comparators.comparator.types.matching;
+package org.fs.comparator.comparators.comparator.types.comparator;
 
+import org.fs.comparator.comparators.comparator.types.FieldsComparator;
+import org.fs.comparator.comparators.comparator.types.container.RecordFieldsContainer;
 import org.fs.comparator.comparators.exception.ComparatorSettingsException;
 import org.fs.comparator.comparators.comparator.Terminatable;
 import org.fs.comparator.comparators.util.ExtractorUtils;
@@ -10,7 +12,7 @@ import java.util.*;
 /**
  * Compare fields excludes some of them
  */
-public class ExcludeFieldsComparator extends FieldsComparator implements Terminatable {
+public final class ExcludeFieldsComparator extends FieldsComparator implements Terminatable {
     private final Object left;
     private final Object right;
 
@@ -31,6 +33,9 @@ public class ExcludeFieldsComparator extends FieldsComparator implements Termina
         Set<Field> lf = ExtractorUtils.extractFieldsExclude(left, excludeFields);
         Set<Field> rf = ExtractorUtils.extractFieldsExclude(right, excludeFields);
 
-        return super.fieldsCompare(lf, rf, left, right);
+        return super.fieldsCompare(
+            new RecordFieldsContainer(lf, left),
+            new RecordFieldsContainer(rf, right)
+        );
     }
 }

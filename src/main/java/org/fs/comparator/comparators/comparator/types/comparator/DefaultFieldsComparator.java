@@ -1,6 +1,9 @@
-package org.fs.comparator.comparators.comparator.types.matching;
+package org.fs.comparator.comparators.comparator.types.comparator;
 
 import org.fs.comparator.comparators.comparator.Terminatable;
+import org.fs.comparator.comparators.comparator.types.FieldsComparator;
+import org.fs.comparator.comparators.comparator.types.container.RecordFieldContainer;
+import org.fs.comparator.comparators.comparator.types.container.RecordFieldsContainer;
 import org.fs.comparator.comparators.util.ExtractorUtils;
 
 final public class DefaultFieldsComparator extends FieldsComparator implements Terminatable {
@@ -17,6 +20,9 @@ final public class DefaultFieldsComparator extends FieldsComparator implements T
         var lt = ExtractorUtils.extractFields(left);
         var rt = ExtractorUtils.extractFields(right);
 
-        return super.fieldsCompare(lt, rt, left, right);
+        return super.fieldsCompare(
+            new RecordFieldsContainer(lt, left),
+            new RecordFieldsContainer(rt, right)
+        );
     }
 }

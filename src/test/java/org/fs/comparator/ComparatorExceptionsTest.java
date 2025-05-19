@@ -16,7 +16,6 @@ public class ComparatorExceptionsTest {
     void test1(String[] exclude, Object left, Object right) {
         assertThatThrownBy(() ->
                 ComparatorUtils.compareObjects(left, right)
-                        .compareMatchingNames()
                         .excludeFields(exclude)
                         .compare()
         )
@@ -30,7 +29,6 @@ public class ComparatorExceptionsTest {
     void test2(String[] exclude, Object left, Object right) {
         assertThatThrownBy(() ->
                 ComparatorUtils.compareObjects(left, right)
-                        .compareMatchingNames()
                         .onlyFields(exclude)
                         .compare()
         )

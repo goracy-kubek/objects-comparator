@@ -5,17 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e87e0dc-2e7b-4ed0-8579-28a46106a678" name="Changes" comment="Exception checking">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/CompareDifferentFields.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldsContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/exception/FieldNotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentNamesComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldsComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingNamesComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingFieldsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/CompareDifferentFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DifferentFieldsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/container/DifferentFieldContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldsComparator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/DefaultFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DefaultFieldsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/ExcludeFieldsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/FieldsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingFieldsComparator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/OnlyFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/OnlyFieldsComparator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorUtilsTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +55,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -70,26 +76,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.Build comparator.executor": "Run",
-    "JUnit.AllTests.executor": "Run",
-    "JUnit.TestClass.executor": "Run",
-    "JUnit.TestMethod.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "transfer",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/fs/Projects/comparator",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.Build comparator.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AllTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestClass.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestMethod.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;transfer&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/fs/Projects/comparator&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="JUnit.AllTests">
+}</component>
+  <component name="RunManager" selected="JUnit.TestMethod">
     <configuration name="AllTests" type="JUnit" factoryName="JUnit">
       <module name="comparator.test" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -107,8 +113,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="PACKAGE_NAME" value="org.fs.comparator" />
-      <option name="MAIN_CLASS_NAME" value="org.fs.comparator.ComparatorUtilsTest" />
-      <option name="METHOD_NAME" value="test1" />
+      <option name="MAIN_CLASS_NAME" value="org.fs.comparator.ComparatorTest" />
+      <option name="METHOD_NAME" value="test4" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
