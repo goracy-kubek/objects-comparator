@@ -1,7 +1,7 @@
 package org.fs.comparator.comparator;
 
 /**
- * Represents an comparableObject that can terminate a process.
+ * Mark class that can start comparing process
  */
 @FunctionalInterface
 public interface Terminable {

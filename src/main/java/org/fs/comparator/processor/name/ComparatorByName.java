@@ -1,40 +1,39 @@
 package org.fs.comparator.processor.name;
 
 import org.fs.comparator.comparator.Terminable;
-import org.fs.comparator.comparator.strategies.filter.FilterExcludeFields;
-import org.fs.comparator.comparator.strategies.validator.ValidateDifferentTypeStrategy;
-import org.fs.comparator.comparator.type.DifferentFieldsComparator;
-import org.fs.comparator.comparator.type.ExcludeFieldsComparator;
-import org.fs.comparator.comparator.type.OnlyFieldsComparator;
-import org.fs.comparator.container.ConditionContainer;
+import org.fs.comparator.comparator.processors.validator.ValidateDifferentType;
+import org.fs.comparator.comparator.type.AddDifferentFieldsToCompare;
+import org.fs.comparator.comparator.type.ExcludeFields;
+import org.fs.comparator.comparator.type.OnlyFields;
+import org.fs.comparator.container.ConditionProcessor;
 
 public class ComparatorByName implements Terminable {
-    private final ConditionContainer conditionContainer;
+    private final ConditionProcessor conditionProcessor;
 
-    public ComparatorByName(ConditionContainer conditionContainer) {
-        this.conditionContainer = conditionContainer;
+    public ComparatorByName(ConditionProcessor conditionProcessor) {
+        this.conditionProcessor = conditionProcessor;
     }
 
-    public ExcludeFieldsComparator excludeFields(String... fields) {
-        return new ExcludeFieldsComparator(conditionContainer, fields);
+    public ExcludeFields excludeFields(String... fields) {
+        return new ExcludeFields(conditionProcessor, fields);
     }
 
-    public OnlyFieldsComparator onlyFields(String... fields) {
-        return new OnlyFieldsComparator(conditionContainer, fields);
+    public OnlyFields onlyFields(String... fields) {
+        return new OnlyFields(conditionProcessor, fields);
     }
 
-    public DifferentFieldsComparator differentFieldsCompare(String... fields) {
-        return new DifferentFieldsComparator(conditionContainer, fields);
+    public AddDifferentFieldsToCompare addDifferentFieldsToCompare(String... fields) {
+        return new AddDifferentFieldsToCompare(conditionProcessor, fields);
     }
 
     public ComparatorByName compareDifferentTypes() {
-        conditionContainer.addStrategy(new ValidateDifferentTypeStrategy());
+        conditionProcessor.addStrategy(new ValidateDifferentType());
 
         return this;
     }
 
     @Override
     public boolean compare() {
-        return conditionContainer.compare();
+        return conditionProcessor.compare();
     }
 }

@@ -30,13 +30,13 @@ public class FieldsComparatorUtils {
 
         for (Field leftField : leftRecord.fields()) {
             String leftFieldName = leftField.getName();
-            Object leftValue = ExtractorUtils.extractValue(leftField, leftRecord.comparableObject());
+            Object leftValue = ExtractorUtils.extractValue(leftField, leftRecord.comparableObjectWrapper());
 
             if (!rf.containsKey(leftFieldName)) {
                 continue;
             }
 
-            Object rightValue = ExtractorUtils.extractValue(rf.get(leftFieldName), rightRecord.comparableObject());
+            Object rightValue = ExtractorUtils.extractValue(rf.get(leftFieldName), rightRecord.comparableObjectWrapper());
 
             if (!leftValue.equals(rightValue)) {
                 return false;

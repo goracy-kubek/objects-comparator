@@ -6,19 +6,19 @@ import org.fs.comparator.container.object.LeftObject;
 import org.fs.comparator.container.object.RightObject;
 import org.fs.comparator.util.ExtractorUtils;
 import org.fs.comparator.util.FieldsComparatorUtils;
-import org.fs.comparator.container.ConditionContainer;
+import org.fs.comparator.container.ConditionProcessor;
 
 final public class DefaultFieldsComparator implements Terminable {
-    private final ConditionContainer conditionContainer;
+    private final ConditionProcessor conditionProcessor;
 
-    public DefaultFieldsComparator(ConditionContainer conditionContainer) {
-        this.conditionContainer = conditionContainer;
+    public DefaultFieldsComparator(ConditionProcessor conditionProcessor) {
+        this.conditionProcessor = conditionProcessor;
     }
 
     @Override
     public boolean compare() {
-        LeftObject left = conditionContainer.getLeft();
-        RightObject right = conditionContainer.getRight();
+        LeftObject left = conditionProcessor.getLeft();
+        RightObject right = conditionProcessor.getRight();
 
         var lf = ExtractorUtils.extractFields(left);
         var rf = ExtractorUtils.extractFields(right);

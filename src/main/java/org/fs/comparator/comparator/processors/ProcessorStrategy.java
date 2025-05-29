@@ -1,15 +1,15 @@
-package org.fs.comparator.comparator.strategies;
+package org.fs.comparator.comparator.processors;
 
 import org.fs.comparator.comparator.ComparatorPriority;
 import org.fs.comparator.container.object.LeftObject;
 import org.fs.comparator.container.object.RightObject;
 
-public interface ComparatorStrategy extends Comparable<ComparatorStrategy> {
+public interface ProcessorStrategy extends Comparable<ProcessorStrategy> {
     ComparatorPriority getPriority();
     void apply(LeftObject left, RightObject right);
 
     @Override
-    default int compareTo(ComparatorStrategy o) {
-        return getPriority().getPriority() - o.getPriority().getPriority();
+    default int compareTo(ProcessorStrategy o) {
+        return getPriority().toNumber() - o.getPriority().toNumber();
     }
 }

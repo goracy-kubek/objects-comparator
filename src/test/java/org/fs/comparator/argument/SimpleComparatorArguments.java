@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 import java.util.stream.Stream;
 
 @SuppressWarnings({"FieldMayBeFinal", "unused"})
-public class ComparatorArguments implements ArgumentsProvider {
+public class SimpleComparatorArguments implements ArgumentsProvider {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
         return Stream.of(

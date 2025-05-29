@@ -1,31 +1,31 @@
 package org.fs.comparator.processor;
 
 import org.fs.comparator.comparator.Terminable;
-import org.fs.comparator.comparator.strategies.extractor.ExtractByNameStrategy;
-import org.fs.comparator.container.ConditionContainer;
+import org.fs.comparator.comparator.processors.extractor.ExtractByName;
+import org.fs.comparator.container.ConditionProcessor;
 import org.fs.comparator.container.object.LeftObject;
 import org.fs.comparator.container.object.RightObject;
 import org.fs.comparator.processor.name.ComparatorByName;
 
 final public class ObjectsComparator implements Terminable {
-    private final ConditionContainer conditionContainer;
+    private final ConditionProcessor conditionProcessor;
 
     public ObjectsComparator(Object left, Object right) {
         if(left == null || right == null) {
             throw new IllegalArgumentException("Objects mustn't be null");
         }
 
-        this.conditionContainer = new ConditionContainer(new LeftObject(left), new RightObject(right));
+        this.conditionProcessor = new ConditionProcessor(new LeftObject(left), new RightObject(right));
     }
 
-    public ComparatorByName compareByFieldNames() {
-        conditionContainer.addStrategy(new ExtractByNameStrategy());
+    public ComparatorByName compareByEqualsNames() {
+        conditionProcessor.addStrategy(new ExtractByName());
 
-        return new ComparatorByName(conditionContainer);
+        return new ComparatorByName(conditionProcessor);
     }
 
     @Override
     public boolean compare() {
-        return conditionContainer.compare();
+        return conditionProcessor.compare();
     }
 }

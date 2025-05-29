@@ -1,11 +1,11 @@
-package org.fs.comparator.comparator.strategies.filter;
+package org.fs.comparator.comparator.processors.filter;
 
 import org.fs.comparator.comparator.ComparatorPriority;
-import org.fs.comparator.comparator.strategies.ComparatorStrategy;
+import org.fs.comparator.comparator.processors.ProcessorStrategy;
 import org.fs.comparator.container.object.LeftObject;
 import org.fs.comparator.container.object.RightObject;
 
-public class FilterExcludeFields implements ComparatorStrategy {
+public class FilterExcludeFields implements ProcessorStrategy {
     private final String[] fields;
 
     public FilterExcludeFields(String... fields) {

@@ -1,12 +1,12 @@
-package org.fs.comparator.comparator.strategies.extractor;
+package org.fs.comparator.comparator.processors.extractor;
 
 import org.fs.comparator.comparator.ComparatorPriority;
-import org.fs.comparator.comparator.strategies.ComparatorStrategy;
+import org.fs.comparator.comparator.processors.ProcessorStrategy;
 import org.fs.comparator.container.RecordFieldContainer;
 import org.fs.comparator.container.object.LeftObject;
 import org.fs.comparator.container.object.RightObject;
 
-public class ExtractByNameStrategy implements ComparatorStrategy {
+public class ExtractByName implements ProcessorStrategy {
     @Override
     public ComparatorPriority getPriority() {
         return ComparatorPriority.EXTRACTOR;
