@@ -1,4 +1,4 @@
-package org.fs.comparator.comparators.comparator.types.container;
+package org.fs.comparator.container;
 
 /**
  * Contains fields that will be used for comparing

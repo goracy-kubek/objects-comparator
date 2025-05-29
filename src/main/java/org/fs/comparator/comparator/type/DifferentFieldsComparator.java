@@ -1,28 +1,28 @@
-package org.fs.comparator.comparators.comparator.types.comparator;
+package org.fs.comparator.comparator.type;
 
-import org.fs.comparator.comparators.comparator.Terminatable;
-import org.fs.comparator.comparators.comparator.types.container.DifferentFieldContainer;
-import org.fs.comparator.comparators.comparator.types.FieldsComparator;
-import org.fs.comparator.comparators.comparator.types.container.RecordFieldContainer;
-import org.fs.comparator.comparators.exception.ComparatorSettingsException;
-import org.fs.comparator.comparators.util.ExtractorUtils;
+import org.fs.comparator.comparator.Terminable;
+import org.fs.comparator.container.ConditionContainer;
+import org.fs.comparator.container.object.LeftObject;
+import org.fs.comparator.container.object.RightObject;
+import org.fs.comparator.util.ExtractorUtils;
+import org.fs.comparator.util.FieldsComparatorUtils;
+import org.fs.comparator.container.DifferentFieldContainer;
+import org.fs.comparator.container.RecordFieldContainer;
+import org.fs.comparator.exception.ComparatorSettingsException;
 
 import java.util.*;
 
 /**
  * Compare fields with not the save name
  */
-public final class DifferentFieldsComparator extends FieldsComparator implements Terminatable {
-    private final Object left;
-    private final Object right;
-
+public final class DifferentFieldsComparator implements Terminable {
+    private final ConditionContainer conditionContainer;
     private final List<DifferentFieldContainer> onlyFields;
 
-    public DifferentFieldsComparator(Object left, Object right, String... fields) {
+    public DifferentFieldsComparator(ConditionContainer conditionContainer, String... fields) {
         validateFields(fields);
 
-        this.left = left;
-        this.right = right;
+        this.conditionContainer = conditionContainer;
         this.onlyFields = parseFields(fields);
     }
 
@@ -51,10 +51,13 @@ public final class DifferentFieldsComparator extends FieldsComparator implements
     @Override
     public boolean compare() {
         for (DifferentFieldContainer fieldPair : onlyFields) {
+            LeftObject left = conditionContainer.getLeft();
+            RightObject right = conditionContainer.getRight();
+
             RecordFieldContainer lr = ExtractorUtils.extractFieldByPathRecursively(fieldPair.leftFieldPath(), left);
             RecordFieldContainer rr = ExtractorUtils.extractFieldByPathRecursively(fieldPair.rightFieldPath(), right);
 
-            boolean result = super.fieldsCompare(lr, rr);
+            boolean result = FieldsComparatorUtils.fieldsCompare(lr, rr);
 
             if(!result) {
                 return false;

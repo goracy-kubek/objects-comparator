@@ -1,28 +1,25 @@
-package org.fs.comparator.comparators.comparator.types;
+package org.fs.comparator.util;
 
-import org.fs.comparator.comparators.comparator.types.container.RecordFieldContainer;
-import org.fs.comparator.comparators.comparator.types.container.RecordFieldsContainer;
-import org.fs.comparator.comparators.util.ExtractorUtils;
+import org.fs.comparator.container.RecordFieldContainer;
+import org.fs.comparator.container.RecordFieldsContainer;
 
 import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
  * Basic comparator class
  */
-public abstract class FieldsComparator {
+public class FieldsComparatorUtils {
 
     /**
      * Compare objects by fields
      *
-     * @param leftRecord  Left record with object and fields
-     * @param rightRecord Right record with object and fields
+     * @param leftRecord  Left record with comparableObject and fields
+     * @param rightRecord Right record with comparableObject and fields
      * @return Result of comparing
      */
-    protected boolean fieldsCompare(
+    public static boolean fieldsCompare(
             RecordFieldsContainer leftRecord,
             RecordFieldsContainer rightRecord
     ) {
@@ -33,13 +30,13 @@ public abstract class FieldsComparator {
 
         for (Field leftField : leftRecord.fields()) {
             String leftFieldName = leftField.getName();
-            Object leftValue = ExtractorUtils.extractValue(leftField, leftRecord.object());
+            Object leftValue = ExtractorUtils.extractValue(leftField, leftRecord.comparableObject());
 
             if (!rf.containsKey(leftFieldName)) {
                 continue;
             }
 
-            Object rightValue = ExtractorUtils.extractValue(rf.get(leftFieldName), rightRecord.object());
+            Object rightValue = ExtractorUtils.extractValue(rf.get(leftFieldName), rightRecord.comparableObject());
 
             if (!leftValue.equals(rightValue)) {
                 return false;
@@ -49,7 +46,7 @@ public abstract class FieldsComparator {
         return true;
     }
 
-    protected boolean fieldsCompare(
+    public static boolean fieldsCompare(
             RecordFieldContainer leftRecord,
             RecordFieldContainer rightRecord
     ) {
