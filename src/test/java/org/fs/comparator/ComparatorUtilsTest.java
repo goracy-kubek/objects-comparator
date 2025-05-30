@@ -18,7 +18,6 @@ public class ComparatorUtilsTest {
     void test1(Object left, Object right) {
         assertThatThrownBy(() ->
                 ComparatorUtils.compareObjects(left, right)
-                        .compareMatchingNames()
                         .compare()
         )
             .isInstanceOf(IllegalArgumentException.class)

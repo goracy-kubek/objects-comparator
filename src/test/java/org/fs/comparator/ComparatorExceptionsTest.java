@@ -1,7 +1,7 @@
 package org.fs.comparator;
 
 import org.fs.comparator.argument.ComparatorExceptionsNullBlankEmptyArguments;
-import org.fs.comparator.comparators.exception.ComparatorSettingsException;
+import org.fs.comparator.exception.ComparatorSettingsException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
@@ -16,7 +16,7 @@ public class ComparatorExceptionsTest {
     void test1(String[] exclude, Object left, Object right) {
         assertThatThrownBy(() ->
                 ComparatorUtils.compareObjects(left, right)
-                        .compareMatchingNames()
+                        .compareByEqualsNames()
                         .excludeFields(exclude)
                         .compare()
         )
@@ -30,7 +30,7 @@ public class ComparatorExceptionsTest {
     void test2(String[] exclude, Object left, Object right) {
         assertThatThrownBy(() ->
                 ComparatorUtils.compareObjects(left, right)
-                        .compareMatchingNames()
+                        .compareByEqualsNames()
                         .onlyFields(exclude)
                         .compare()
         )

@@ -1,8 +1,6 @@
 package org.fs.comparator;
 
-import org.fs.comparator.argument.ComparatorArguments;
-import org.fs.comparator.argument.ExcludeFieldsArguments;
-import org.fs.comparator.argument.OnlyFieldsArguments;
+import org.fs.comparator.argument.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
@@ -14,11 +12,11 @@ public class ComparatorTest {
 
     @ParameterizedTest
     @DisplayName("Simple comparator")
-    @ArgumentsSource(ComparatorArguments.class)
+    @ArgumentsSource(SimpleComparatorArguments.class)
     void test1(boolean expected, Object left, Object right) {
         boolean actual = ComparatorUtils.compareObjects(left, right)
-                .compareMatchingNames()
-                .compare();
+                        .compareByEqualsNames()
+                        .compare();
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -28,7 +26,7 @@ public class ComparatorTest {
     @ArgumentsSource(ExcludeFieldsArguments.class)
     void test2(boolean expected, String[] exclude, Object left, Object right) {
         boolean actual = ComparatorUtils.compareObjects(left, right)
-                .compareMatchingNames()
+                .compareByEqualsNames()
                 .excludeFields(exclude)
                 .compare();
 
@@ -40,8 +38,31 @@ public class ComparatorTest {
     @ArgumentsSource(OnlyFieldsArguments.class)
     void test3(boolean expected, String[] only, Object left, Object right) {
         boolean actual = ComparatorUtils.compareObjects(left, right)
-                .compareMatchingNames()
+                .compareByEqualsNames()
                 .onlyFields(only)
+                .compare();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("Compare deep fields")
+    @ArgumentsSource(DeepFieldsArguments.class)
+    void test4(boolean expected, String[] only, Object left, Object right) {
+        boolean actual = ComparatorUtils.compareObjects(left, right)
+                .compareByDifferentNames("two.two", "three")
+                .compare();
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @DisplayName("Add different fields to compare")
+    @ArgumentsSource(AddDifferentFieldsArguments.class)
+    void test5(boolean expected, String[] only, Object left, Object right) {
+        boolean actual = ComparatorUtils.compareObjects(left, right)
+                .compareByEqualsNames()
+                .addDifferentFieldsToCompare(only)
                 .compare();
 
         assertThat(actual).isEqualTo(expected);

@@ -1,10 +1,10 @@
-package org.fs.comparator.comparators.comparator;
+package org.fs.comparator.comparator;
 
 /**
- * Represents an object that can terminate a process.
+ * Mark class that can start comparing process
  */
 @FunctionalInterface
-public interface Terminatable {
+public interface Terminable {
     /**
      * Initiate comparing process.
      * @return Result of comparing
