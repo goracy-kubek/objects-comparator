@@ -31,4 +31,12 @@ public abstract class ComparableObjectWrapper {
     public abstract void addFieldMapper(String left, String right);
 
     public abstract Map<String, String> getFieldMapper();
+
+    public Optional<RecordFieldContainer> getFieldRecord(String fieldName) {
+        return Optional.ofNullable(getFields().get(fieldName));
+    }
+
+    public Optional<String> getMappedField(String fieldName) {
+        return Optional.ofNullable(getFieldMapper().get(fieldName));
+    }
 }

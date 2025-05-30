@@ -4,6 +4,7 @@ import org.fs.comparator.comparator.processors.ProcessorStrategy;
 import org.fs.comparator.container.object.LeftObject;
 import org.fs.comparator.container.object.RightObject;
 
+import java.util.Optional;
 import java.util.Queue;
 import java.util.concurrent.PriorityBlockingQueue;
 
@@ -45,33 +46,21 @@ public class ConditionProcessor {
             strategies.poll().apply(left, right);
         }
 
-        var fls = left.getFields();
-        var frs = right.getFields();
-
-        for(var fli : fls.entrySet()) {
+        for(var fli : left.getFields().entrySet()) {
             var leftFieldName = fli.getKey();
+            var rightFieldName = left.getMappedField(leftFieldName).orElse(leftFieldName);
 
-            if(!right.getFieldMapper().containsKey(leftFieldName) && !frs.containsKey(fli.getKey())) {
+            Optional<RecordFieldContainer> leftFieldRecord = left.getFieldRecord(leftFieldName);
+            Optional<RecordFieldContainer> rightFieldRecord = right.getFieldRecord(rightFieldName);
+
+            if(leftFieldRecord.isEmpty() || rightFieldRecord.isEmpty()) {
                 continue;
             }
 
-            RecordFieldContainer fr = null;
+            var leftRecord = leftFieldRecord.get();
+            var rightRecord = rightFieldRecord.get();
 
-            if(right.getFieldMapper().containsKey(leftFieldName)) {
-                var rightFieldName = right.getFieldMapper().get(leftFieldName);
-
-                if(!frs.containsKey(rightFieldName)) {
-                    continue;
-                }
-
-                fr = frs.get(rightFieldName);
-            } else {
-                fr = frs.get(leftFieldName);
-            }
-
-            var fl = fli.getValue();
-
-            if(!fl.extractValue().equals(fr.extractValue())) {
+            if(!leftRecord.extractValue().equals(rightRecord.extractValue())) {
                 return false;
             }
         }

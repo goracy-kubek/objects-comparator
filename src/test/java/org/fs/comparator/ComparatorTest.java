@@ -53,8 +53,7 @@ public class ComparatorTest {
     @ArgumentsSource(DeepFieldsArguments.class)
     void test4(boolean expected, String[] only, Object left, Object right) {
         boolean actual = ComparatorUtils.compareObjects(left, right)
-                .compareByEqualsNames()
-                .addDifferentFieldsToCompare("two.two", "three")
+                .compareByDifferentNames("two.two", "three")
                 .compare();
 
         assertThat(actual).isEqualTo(expected);

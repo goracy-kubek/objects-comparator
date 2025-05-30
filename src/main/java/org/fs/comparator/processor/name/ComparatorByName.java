@@ -1,6 +1,7 @@
 package org.fs.comparator.processor.name;
 
 import org.fs.comparator.comparator.Terminable;
+import org.fs.comparator.comparator.processors.extractor.ExtractByName;
 import org.fs.comparator.comparator.processors.validator.ValidateDifferentType;
 import org.fs.comparator.comparator.type.AddDifferentFieldsToCompare;
 import org.fs.comparator.comparator.type.ExcludeFields;
@@ -11,6 +12,8 @@ public class ComparatorByName implements Terminable {
     private final ConditionProcessor conditionProcessor;
 
     public ComparatorByName(ConditionProcessor conditionProcessor) {
+        conditionProcessor.addStrategy(new ExtractByName());
+
         this.conditionProcessor = conditionProcessor;
     }
 

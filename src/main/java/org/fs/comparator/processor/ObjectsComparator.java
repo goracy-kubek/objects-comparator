@@ -1,7 +1,7 @@
 package org.fs.comparator.processor;
 
 import org.fs.comparator.comparator.Terminable;
-import org.fs.comparator.comparator.processors.extractor.ExtractByName;
+import org.fs.comparator.comparator.type.OnlyDifferentFieldsToCompare;
 import org.fs.comparator.container.ConditionProcessor;
 import org.fs.comparator.container.object.LeftObject;
 import org.fs.comparator.container.object.RightObject;
@@ -18,9 +18,11 @@ final public class ObjectsComparator implements Terminable {
         this.conditionProcessor = new ConditionProcessor(new LeftObject(left), new RightObject(right));
     }
 
-    public ComparatorByName compareByEqualsNames() {
-        conditionProcessor.addStrategy(new ExtractByName());
+    public OnlyDifferentFieldsToCompare compareByDifferentNames(String... fields) {
+        return new OnlyDifferentFieldsToCompare(conditionProcessor, fields);
+    }
 
+    public ComparatorByName compareByEqualsNames() {
         return new ComparatorByName(conditionProcessor);
     }
 

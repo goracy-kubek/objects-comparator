@@ -1,4 +1,4 @@
-package org.fs.comparator.comparator.processors.extractor;
+package org.fs.comparator.comparator.processors.filter;
 
 import org.fs.comparator.comparator.ComparatorPriority;
 import org.fs.comparator.comparator.processors.ProcessorStrategy;
@@ -9,10 +9,10 @@ import org.fs.comparator.util.ExtractorUtils;
 
 import java.util.List;
 
-public class ExtractAddDifferentFields implements ProcessorStrategy {
+public class ExtractorOnlyDifferentFields implements ProcessorStrategy {
     private final List<DifferentFieldContainer> fields;
 
-    public ExtractAddDifferentFields(String... fields) {
+    public ExtractorOnlyDifferentFields(String... fields) {
         this.fields = parseFields(fields);
     }
 
