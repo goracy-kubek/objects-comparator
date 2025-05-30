@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e87e0dc-2e7b-4ed0-8579-28a46106a678" name="Changes" comment="New comparator strategy">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/filter/ExtractorOnlyDifferentFields.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/type/OnlyDifferentFieldsToCompare.java" afterDir="false" />
+    <list default="true" id="2e87e0dc-2e7b-4ed0-8579-28a46106a678" name="Changes" comment="New strategy old tests were passed">
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/argument/AddDifferentFieldsArguments.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/ProcessorStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/ProcessorStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/extractor/ExtractAddDifferentFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/extractor/ExtractAddDifferentFields.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/filter/FilterOnlyFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/filter/FilterOnlyFields.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/object/ComparableObjectWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/object/ComparableObjectWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/processor/ObjectsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/processor/ObjectsComparator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/processor/name/ComparatorByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/processor/name/ComparatorByName.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" afterDir="false" />
     </list>
@@ -103,7 +97,7 @@
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AllTests">
+  <component name="RunManager" selected="JUnit.TestMethod">
     <configuration name="AllTests" type="JUnit" factoryName="JUnit">
       <module name="comparator.test" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -122,7 +116,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="PACKAGE_NAME" value="org.fs.comparator" />
       <option name="MAIN_CLASS_NAME" value="org.fs.comparator.ComparatorTest" />
-      <option name="METHOD_NAME" value="test3" />
+      <option name="METHOD_NAME" value="test5" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748541827270</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="New strategy old tests were passed">
+      <option name="closed" value="true" />
+      <created>1748628856106</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1748628856106</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -203,16 +205,13 @@
     <MESSAGE value="Parametrized tests" />
     <MESSAGE value="Exception checking" />
     <MESSAGE value="New comparator strategy" />
-    <option name="LAST_COMMIT_MESSAGE" value="New comparator strategy" />
+    <MESSAGE value="New strategy tests passed" />
+    <MESSAGE value="New strategy old tests were passed" />
+    <option name="LAST_COMMIT_MESSAGE" value="New strategy old tests were passed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java</url>
           <line>59</line>
@@ -222,6 +221,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java</url>
           <line>62</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -17,14 +17,21 @@ public class ComparatorByName implements Terminable {
         this.conditionProcessor = conditionProcessor;
     }
 
-    public ExcludeFields excludeFields(String... fields) {
-        return new ExcludeFields(conditionProcessor, fields);
+    public ComparatorByName excludeFields(String... fields) {
+        new ExcludeFields(conditionProcessor, fields);
+
+        return this;
     }
 
     public OnlyFields onlyFields(String... fields) {
         return new OnlyFields(conditionProcessor, fields);
     }
 
+    /**
+     * Add different fields to compare. Added fields exclude all fields that will meet on the path.
+     * @param fields Fields to compare
+     * @return Comparator
+     */
     public AddDifferentFieldsToCompare addDifferentFieldsToCompare(String... fields) {
         return new AddDifferentFieldsToCompare(conditionProcessor, fields);
     }
