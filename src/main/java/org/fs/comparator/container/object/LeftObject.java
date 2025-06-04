@@ -3,7 +3,6 @@ package org.fs.comparator.container.object;
 import org.fs.comparator.container.RecordFieldContainer;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**

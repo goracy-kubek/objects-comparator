@@ -5,10 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e87e0dc-2e7b-4ed0-8579-28a46106a678" name="Changes" comment="New strategy old tests were passed">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/argument/AddDifferentFieldsArguments.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/comparator/Comparator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/comparator/CompareDifferentTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/comparator/DefaultComparator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ComparatorRecordContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/exception/ValidationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/TwoObjectsUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/argument/DifferentTypesArguments.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/extractor/ExtractAddDifferentFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/extractor/ExtractAddDifferentFields.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/processor/name/ComparatorByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/processor/name/ComparatorByName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/ComparatorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/ComparatorUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/ComparatorPriority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/ComparatorPriority.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/validator/ValidateDifferentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/validator/ValidateRejectDifferentTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/type/AddDifferentFieldsToCompare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/type/AddDifferentFieldsToCompare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/type/ExcludeFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/type/ExcludeFields.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/type/OnlyDifferentFieldsToCompare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/type/OnlyDifferentFieldsToCompare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/type/OnlyFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/type/OnlyFields.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/ConditionProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/object/LeftObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/object/LeftObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/processor/ObjectsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/ObjectsComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/processor/name/ComparatorByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/ComparatorByName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/ExtractorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/ExtractorUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/FieldsComparatorUtils.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,9 +61,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Record" />
         <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -81,13 +98,14 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Gradle.Build comparator.executor": "Run",
+    "Gradle.ComparatorTest.test7.executor": "Run",
     "JUnit.AllTests.executor": "Run",
     "JUnit.TestClass.executor": "Run",
     "JUnit.TestMethod.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "filter__version",
+    "git-widget-placeholder": "dev",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/fs/Projects/comparator",
@@ -97,7 +115,7 @@
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.TestMethod">
+  <component name="RunManager" selected="JUnit.AllTests">
     <configuration name="AllTests" type="JUnit" factoryName="JUnit">
       <module name="comparator.test" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -116,7 +134,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="PACKAGE_NAME" value="org.fs.comparator" />
       <option name="MAIN_CLASS_NAME" value="org.fs.comparator.ComparatorTest" />
-      <option name="METHOD_NAME" value="test5" />
+      <option name="METHOD_NAME" value="test7" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -213,22 +231,12 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/ConditionProcessor.java</url>
           <line>52</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ConditionProcessor.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/comparator/processors/ConditionProcessor.java</url>
           <line>63</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>

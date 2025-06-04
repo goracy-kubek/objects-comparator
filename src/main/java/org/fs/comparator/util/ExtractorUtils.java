@@ -4,26 +4,11 @@ import org.fs.comparator.container.RecordFieldContainer;
 import org.fs.comparator.exception.FieldNotFoundException;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Utils for filter fields
  */
 public class ExtractorUtils {
-
-    /**
-     * Extract fields by record container
-     * @param record Record object with field
-     * @return Field value
-     */
-    public static Object extractValue(RecordFieldContainer record) {
-        return extractValue(record.field(), record.object());
-    }
-
     /**
      * Extract values form field
      * @param field Field with value
@@ -40,40 +25,6 @@ public class ExtractorUtils {
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * Extract fields form object. Only declared fields
-     * @param object Object with specific fields
-     * @return Declared fields in object
-     */
-    public static Set<Field> extractFields(Object object) {
-        return Arrays.stream(object.getClass().getDeclaredFields())
-                .collect(Collectors.toSet());
-    }
-
-    /**
-     * Extract fields with don't have such names
-     * @param object Object with fields
-     * @param exclude Names that fields shouldn't have
-     * @return Fields that don't have names in params
-     */
-    public static Set<Field> extractFieldsExclude(Object object, Set<String> exclude) {
-        return Arrays.stream(object.getClass().getDeclaredFields())
-                .filter(e -> !exclude.contains(e.getName()))
-                .collect(Collectors.toSet());
-    }
-
-    /**
-     * Extract fields with specific names
-     * @param object Object with fields
-     * @param only Fields names for extract
-     * @return Field with only names
-     */
-    public static Set<Field> extractFieldsOnly(Object object, Set<String> only) {
-        return Arrays.stream(object.getClass().getDeclaredFields())
-                .filter(e -> only.contains(e.getName()))
-                .collect(Collectors.toSet());
     }
 
     /**
@@ -120,10 +71,5 @@ public class ExtractorUtils {
         }
 
         throw new FieldNotFoundException("Cannot find field with name: " + name);
-    }
-
-    public static Map<String, Field> extractFieldsToMap(Object object) {
-        return Arrays.stream(object.getClass().getDeclaredFields())
-                .collect(Collectors.toMap(Field::getName, Function.identity()));
     }
 }

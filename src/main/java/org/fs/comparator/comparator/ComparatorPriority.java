@@ -11,7 +11,6 @@ public enum ComparatorPriority {
     EXTRACTOR(1),
     FILTER(2),
     VALIDATOR(3);
-
     private final int toNumber;
 
     ComparatorPriority(int toNumber) {

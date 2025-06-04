@@ -1,6 +1,6 @@
 package org.fs.comparator;
 
-import org.fs.comparator.processor.ObjectsComparator;
+import org.fs.comparator.view.ObjectsComparator;
 
 /**
  * Main class for comparator

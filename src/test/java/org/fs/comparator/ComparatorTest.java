@@ -67,4 +67,27 @@ public class ComparatorTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @DisplayName("Reject different types")
+    @ArgumentsSource(DifferentTypesArguments.class)
+    void test6(Object left, Object right) {
+        boolean actual = ComparatorUtils.compareObjects(left, right)
+                .compareByEqualsNames()
+                .compareDifferentTypes()
+                .compare();
+
+        assertThat(actual).isTrue();
+    }
+
+    @ParameterizedTest
+    @DisplayName("Success compare different types")
+    @ArgumentsSource(DifferentTypesArguments.class)
+    void test7(Object left, Object right) {
+        boolean actual = ComparatorUtils.compareObjects(left, right)
+                .compareByEqualsNames()
+                .compare();
+
+        assertThat(actual).isFalse();
+    }
 }

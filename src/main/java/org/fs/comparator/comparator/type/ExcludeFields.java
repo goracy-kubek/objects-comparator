@@ -3,7 +3,7 @@ package org.fs.comparator.comparator.type;
 import org.fs.comparator.comparator.Terminable;
 import org.fs.comparator.comparator.processors.filter.FilterExcludeFields;
 import org.fs.comparator.exception.ComparatorSettingsException;
-import org.fs.comparator.container.ConditionProcessor;
+import org.fs.comparator.comparator.processors.ConditionProcessor;
 
 import java.util.*;
 

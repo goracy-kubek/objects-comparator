@@ -2,7 +2,7 @@ package org.fs.comparator.comparator.type;
 
 import org.fs.comparator.comparator.Terminable;
 import org.fs.comparator.comparator.processors.extractor.ExtractAddDifferentFields;
-import org.fs.comparator.container.ConditionProcessor;
+import org.fs.comparator.comparator.processors.ConditionProcessor;
 import org.fs.comparator.exception.ComparatorSettingsException;
 
 import java.util.*;

@@ -1,12 +1,12 @@
-package org.fs.comparator.processor.name;
+package org.fs.comparator.view;
 
 import org.fs.comparator.comparator.Terminable;
+import org.fs.comparator.comparator.processors.ConditionProcessor;
+import org.fs.comparator.comparator.processors.comparator.CompareDifferentTypes;
 import org.fs.comparator.comparator.processors.extractor.ExtractByName;
-import org.fs.comparator.comparator.processors.validator.ValidateDifferentType;
 import org.fs.comparator.comparator.type.AddDifferentFieldsToCompare;
 import org.fs.comparator.comparator.type.ExcludeFields;
 import org.fs.comparator.comparator.type.OnlyFields;
-import org.fs.comparator.container.ConditionProcessor;
 
 public class ComparatorByName implements Terminable {
     private final ConditionProcessor conditionProcessor;
@@ -36,8 +36,12 @@ public class ComparatorByName implements Terminable {
         return new AddDifferentFieldsToCompare(conditionProcessor, fields);
     }
 
+    /**
+     * Allow to compare with typecast
+     * @return {@link ComparatorByName}
+     */
     public ComparatorByName compareDifferentTypes() {
-        conditionProcessor.addStrategy(new ValidateDifferentType());
+        conditionProcessor.addComparator(new CompareDifferentTypes());
 
         return this;
     }

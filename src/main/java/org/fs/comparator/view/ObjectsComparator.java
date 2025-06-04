@@ -1,11 +1,10 @@
-package org.fs.comparator.processor;
+package org.fs.comparator.view;
 
 import org.fs.comparator.comparator.Terminable;
 import org.fs.comparator.comparator.type.OnlyDifferentFieldsToCompare;
-import org.fs.comparator.container.ConditionProcessor;
 import org.fs.comparator.container.object.LeftObject;
 import org.fs.comparator.container.object.RightObject;
-import org.fs.comparator.processor.name.ComparatorByName;
+import org.fs.comparator.comparator.processors.ConditionProcessor;
 
 final public class ObjectsComparator implements Terminable {
     private final ConditionProcessor conditionProcessor;
