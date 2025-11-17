@@ -1,32 +1,18 @@
 package org.fs.comparator.view;
 
-import org.fs.comparator.comparator.Terminable;
-import org.fs.comparator.comparator.type.OnlyDifferentFieldsToCompare;
-import org.fs.comparator.container.object.LeftObject;
-import org.fs.comparator.container.object.RightObject;
-import org.fs.comparator.comparator.processors.ConditionProcessor;
+import org.fs.comparator.container.LeftObject;
+import org.fs.comparator.container.RightObject;
 
-final public class ObjectsComparator implements Terminable {
-    private final ConditionProcessor conditionProcessor;
+final public class ObjectsComparator {
+    private final LeftObject left;
+    private final RightObject right;
 
     public ObjectsComparator(Object left, Object right) {
         if(left == null || right == null) {
             throw new IllegalArgumentException("Objects mustn't be null");
         }
 
-        this.conditionProcessor = new ConditionProcessor(new LeftObject(left), new RightObject(right));
-    }
-
-    public OnlyDifferentFieldsToCompare compareByDifferentNames(String... fields) {
-        return new OnlyDifferentFieldsToCompare(conditionProcessor, fields);
-    }
-
-    public ComparatorByName compareByEqualsNames() {
-        return new ComparatorByName(conditionProcessor);
-    }
-
-    @Override
-    public boolean compare() {
-        return conditionProcessor.compare();
+        this.left = new LeftObject(left);
+        this.right = new RightObject(right);
     }
 }
