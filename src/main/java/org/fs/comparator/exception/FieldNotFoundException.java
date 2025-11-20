@@ -1,7 +1,7 @@
 package org.fs.comparator.exception;
 
 public class FieldNotFoundException extends RuntimeException {
-    public FieldNotFoundException(String message) {
-        super(message);
+    public FieldNotFoundException(String fieldName) {
+        super("No such field with name: " + fieldName);
     }
 }

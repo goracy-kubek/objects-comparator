@@ -1,6 +1,8 @@
 package org.fs.comparator;
 
-import org.fs.comparator.view.ObjectsComparator;
+import org.fs.comparator.container.LeftObject;
+import org.fs.comparator.container.RightObject;
+import org.fs.comparator.view.DefaultComparator;
 
 /**
  * Main class for comparator
@@ -13,7 +15,7 @@ public class ComparatorUtils {
      * @param right Right comparableObject for compare
      * @return Standard comparableObject comparator
      */
-    public static ObjectsComparator compareObjects(Object left, Object right) {
-        return new ObjectsComparator(left, right);
+    public static DefaultComparator compareObjects(Object left, Object right) {
+        return new DefaultComparator(new LeftObject(left), new RightObject(right));
     }
 }
