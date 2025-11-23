@@ -11,11 +11,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FieldUtils {
-    public static Field getField(String fieldName, Object object) {
-        return getThisObjectField(fieldName, object)
-                .orElseThrow(() -> new FieldNotFoundException(fieldName));
-    }
-
     public static Optional<Field> getFieldOptional(String fieldName, Class<?> clazz) {
         try {
             return Optional.of(clazz.getDeclaredField(fieldName));
@@ -44,7 +39,28 @@ public class FieldUtils {
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    public static Object getFieldValue(Field field, Object object) {
+    public static Object getFieldValueFromTheDeep(String fieldName, Object object) {
+        String[] fields = fieldName.split("\\.");
+        Object o = object;
+
+        for (String field : fields) {
+            if(o == null) {
+                return null;
+            }
+
+            Optional<Field> thisObjectField = getThisObjectField(field, o);
+
+            if(thisObjectField.isEmpty()) {
+                throw new FieldNotFoundException(fieldName);
+            }
+
+            o = getFieldValue(thisObjectField.get(), o);
+        }
+
+        return o;
+    }
+
+    private static Object getFieldValue(Field field, Object object) {
         try {
             if(!field.canAccess(object)) {
                 field.setAccessible(true);

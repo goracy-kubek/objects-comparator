@@ -2,7 +2,6 @@ package org.fs.comparator.container;
 
 import org.fs.comparator.util.FieldUtils;
 
-import java.lang.reflect.Field;
 import java.util.*;
 
 public abstract class ComparableObject {
@@ -24,11 +23,7 @@ public abstract class ComparableObject {
         return object;
     }
 
-    public Field getFieldByName(String name) {
-        return FieldUtils.getField(name, object);
-    }
-
     public Object getFieldValue(String fieldName) {
-        return FieldUtils.getFieldValue(getFieldByName(fieldName), object);
+        return FieldUtils.getFieldValueFromTheDeep(fieldName, object);
     }
 }
