@@ -4,21 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e87e0dc-2e7b-4ed0-8579-28a46106a678" name="Changes" comment="New strategy old tests were passed">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ComparableField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/CompareUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/ExtractorUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/FieldUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/AddComparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/ExcludeComparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/OnlyComparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparingTheSameNamesTest.java" afterDir="false" />
+    <list default="true" id="2e87e0dc-2e7b-4ed0-8579-28a46106a678" name="Changes" comment="Add deep comparing">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/Comparable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/ComparatorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/ComparatorUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ComparableField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ComparableField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ComparableObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ComparableObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/exception/FieldNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/exception/FieldNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/ObjectsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/DefaultComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparableObjectTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/LeftObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/LeftObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/RightObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/container/RightObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/exception/ComparatorSettingsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/CompareUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/CompareUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/ExtractorUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/FieldUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/util/FieldUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/AddComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/AddComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/DefaultComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/DefaultComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/ExcludeComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/ExcludeComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/OnlyComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/view/OnlyComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorUtilsTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparingTheSameNamesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparingTheSameNamesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/argument/AddDifferentFieldsArguments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/argument/AddDifferentFieldsArguments.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,8 +60,8 @@
       <list>
         <option value="Enum" />
         <option value="Record" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -96,9 +101,10 @@
     "Gradle.ComparableObjectTest.executor": "Run",
     "Gradle.ComparatorTest.test1.executor": "Run",
     "Gradle.ComparatorTest.test2.executor": "Debug",
-    "Gradle.ComparatorTest.test7.executor": "Run",
+    "Gradle.ComparatorTest.test7.executor": "Debug",
     "Gradle.ComparatorUtilsTest.executor": "Run",
     "Gradle.ComparatorUtilsTest.test1.executor": "Run",
+    "Gradle.ComparingTheSameNamesTest.test1.executor": "Run",
     "Gradle.Download Sources.executor": "Run",
     "Gradle.Tests in 'org.fs.comparator'.executor": "Run",
     "JUnit.AllTests.executor": "Run",
@@ -117,31 +123,7 @@
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.Tests in 'org.fs.comparator'">
-    <configuration name="ComparableObjectTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;org.fs.comparator.FieldExtractorTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.ComparatorTest.test7">
     <configuration name="ComparatorTest.test1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -190,7 +172,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="ComparatorUtilsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ComparatorTest.test7" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -203,7 +185,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.fs.comparator.ComparatorUtilsTest&quot;" />
+            <option value="&quot;org.fs.comparator.ComparatorTest.test7&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ComparingTheSameNamesTest.test1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.fs.comparator.ComparingTheSameNamesTest.test1&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -273,22 +279,22 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Gradle.ComparatorTest.test7" />
+      <item itemvalue="Gradle.ComparingTheSameNamesTest.test1" />
       <item itemvalue="Gradle.ComparatorTest.test1" />
       <item itemvalue="Gradle.ComparatorTest.test2" />
-      <item itemvalue="Gradle.ComparatorUtilsTest" />
       <item itemvalue="Gradle.Tests in 'org.fs.comparator'" />
-      <item itemvalue="Gradle.ComparableObjectTest" />
       <item itemvalue="JUnit.AllTests" />
       <item itemvalue="JUnit.TestMethod" />
       <item itemvalue="JUnit.Unnamed" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ComparatorTest.test7" />
         <item itemvalue="Gradle.Tests in 'org.fs.comparator'" />
+        <item itemvalue="Gradle.ComparingTheSameNamesTest.test1" />
         <item itemvalue="Gradle.ComparatorTest.test2" />
         <item itemvalue="Gradle.ComparatorTest.test1" />
-        <item itemvalue="Gradle.ComparatorUtilsTest" />
-        <item itemvalue="Gradle.ComparableObjectTest" />
       </list>
     </recent_temporary>
   </component>
@@ -341,7 +347,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748628856106</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add deep comparing">
+      <option name="closed" value="true" />
+      <created>1763902181085</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1763902181085</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -367,38 +381,44 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/view/AddComparator.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="28" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/view/DefaultComparator.java</url>
+          <line>57</line>
+          <properties class="org.fs.comparator.view.DefaultComparator" method="compare">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/view/ExcludeComparator.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="29" />
+          <url>file://$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/util/FieldUtils.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="31" />
+          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/view/OnlyComparator.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/view/OnlyComparator.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ComparableField.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/container/ComparableObject.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/view/DefaultComparator.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/util/ExtractorUtils.java</url>
-          <line>10</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/fs/comparator/util/FieldUtils.java</url>
-          <line>46</line>
-          <properties>
-            <option name="lambda-ordinal" value="0" />
-          </properties>
-          <option name="timeStamp" value="35" />
+          <line>53</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

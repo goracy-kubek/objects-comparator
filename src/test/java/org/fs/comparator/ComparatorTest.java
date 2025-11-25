@@ -45,9 +45,9 @@ public class ComparatorTest {
     @ParameterizedTest
     @DisplayName("Add different fields to compare")
     @ArgumentsSource(AddDifferentFieldsArguments.class)
-    void test5(boolean expected, String[] only, Object left, Object right) {
+    void test5(boolean expected, String exclude, String[] only, Object left, Object right) {
         boolean actual = ComparatorUtils.compareObjects(left, right)
-                .excludeFields("three")
+                .excludeFields(exclude)
                 .moreFields(only)
                 .compare();
 

@@ -13,6 +13,7 @@ public class AddDifferentFieldsArguments implements ArgumentsProvider {
         return Stream.of(
                 Arguments.of(
                         true,
+                        "three",
                         new String[]{ "two.two", "three" },
                         new Object() {
                             private String one = "1";

@@ -2,6 +2,7 @@ package org.fs.comparator;
 
 import org.fs.comparator.container.LeftObject;
 import org.fs.comparator.container.RightObject;
+import org.fs.comparator.exception.ValidationException;
 import org.fs.comparator.view.DefaultComparator;
 
 /**
@@ -16,6 +17,14 @@ public class ComparatorUtils {
      * @return Standard comparableObject comparator
      */
     public static DefaultComparator compareObjects(Object left, Object right) {
+        if(left == null) {
+            throw new ValidationException("Left object cannot be null");
+        }
+
+        if(right == null) {
+            throw new ValidationException("Right object cannot be null");
+        }
+
         return new DefaultComparator(new LeftObject(left), new RightObject(right));
     }
 }

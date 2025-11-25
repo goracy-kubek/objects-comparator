@@ -4,6 +4,9 @@ import org.fs.comparator.util.FieldUtils;
 
 import java.util.*;
 
+/**
+ * Object comparer helper. Helps extract fields and separate {@link LeftObject} from {@link RightObject}
+ */
 public abstract class ComparableObject {
     private final Object object;
 
