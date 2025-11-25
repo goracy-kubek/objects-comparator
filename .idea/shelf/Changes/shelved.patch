@@ -1,0 +1,806 @@
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldsComparator.java
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldsComparator.java b/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldsComparator.java
+deleted file mode 100644
+--- a/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldsComparator.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ /dev/null	(revision f78b99969b08d85df373739661c33f2ca57feec7)
+@@ -1,20 +0,0 @@
+-package org.fs.comparator.comparators.comparator.types.different;
+-
+-import org.fs.comparator.comparators.comparator.types.matching.OnlyFieldsComparator;
+-
+-/**
+- *
+- */
+-final public class DifferentFieldsComparator {
+-    private final Object left;
+-    private final Object right;
+-
+-    public DifferentFieldsComparator(Object left, Object right) {
+-        this.left = left;
+-        this.right = right;
+-    }
+-
+-    public CompareDifferentFields fieldsForCompare(String... fields) {
+-        return new CompareDifferentFields(left, right, fields);
+-    }
+-}
+\ No newline at end of file
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingFieldsComparator.java
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingFieldsComparator.java b/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingFieldsComparator.java
+deleted file mode 100644
+--- a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingFieldsComparator.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ /dev/null	(revision f78b99969b08d85df373739661c33f2ca57feec7)
+@@ -1,37 +0,0 @@
+-package org.fs.comparator.comparators.comparator.types.matching;
+-
+-/**
+- * Compare objects by its fields names
+- */
+-final public class MatchingFieldsComparator {
+-    private final Object left;
+-    private final Object right;
+-
+-    /**
+-     * Main comparator class
+-     * @param left Left object for comparing
+-     * @param right Right object for comparing
+-     */
+-    public MatchingFieldsComparator(Object left, Object right) {
+-        this.left = left;
+-        this.right = right;
+-    }
+-
+-    /**
+-     * Select fields that will be compared.
+-     * @param fields Fields names.
+-     * @return Comparator for fields.
+-     */
+-    public OnlyFieldsComparator onlyFields(String... fields) {
+-        return new OnlyFieldsComparator(left, right, fields);
+-    }
+-
+-    /**
+-     * Select fields that will be excluded.
+-     * @param fields Fields names.
+-     * @return Comparator for fields.
+-     */
+-    public ExcludeFieldsComparator excludeFields(String... fields) {
+-        return new ExcludeFieldsComparator(left, right, fields);
+-    }
+-}
+Index: src/main/java/org/fs/comparator/comparators/exception/FieldNotFoundException.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/exception/FieldNotFoundException.java b/src/main/java/org/fs/comparator/comparators/exception/FieldNotFoundException.java
+new file mode 100644
+--- /dev/null	(date 1747688114324)
++++ b/src/main/java/org/fs/comparator/comparators/exception/FieldNotFoundException.java	(date 1747688114324)
+@@ -0,0 +1,7 @@
++package org.fs.comparator.comparators.exception;
++
++public class FieldNotFoundException extends RuntimeException {
++    public FieldNotFoundException(String message) {
++        super(message);
++    }
++}
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldsContainer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldsContainer.java b/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldsContainer.java
+new file mode 100644
+--- /dev/null	(date 1747689465864)
++++ b/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldsContainer.java	(date 1747689465864)
+@@ -0,0 +1,12 @@
++package org.fs.comparator.comparators.comparator.types.container;
++
++import java.lang.reflect.Field;
++import java.util.Set;
++
++/**
++ * Record that contains object and its fields
++ * @param fields Object fields
++ * @param object Objects with fields
++ */
++public record RecordFieldsContainer(Set<Field> fields, Object object) {
++}
+Index: src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.fs.comparator.comparators.comparator;\r\n\r\nimport org.fs.comparator.comparators.comparator.types.different.DifferentFieldsComparator;\r\nimport org.fs.comparator.comparators.comparator.types.matching.DefaultFieldsComparator;\r\nimport org.fs.comparator.comparators.comparator.types.matching.MatchingFieldsComparator;\r\n\r\nfinal public class ObjectsComparator implements Terminatable {\r\n    private final Object left;\r\n    private final Object right;\r\n\r\n    public ObjectsComparator(Object left, Object right) {\r\n        if(left == null || right == null) {\r\n            throw new IllegalArgumentException(\"Objects mustn't be null\");\r\n        }\r\n\r\n        this.left = left;\r\n        this.right = right;\r\n    }\r\n\r\n    public MatchingFieldsComparator compareMatchingNames() {\r\n        return new MatchingFieldsComparator(left, right);\r\n    }\r\n\r\n    public DifferentFieldsComparator compareDifferentNames() {\r\n        return new DifferentFieldsComparator(left, right);\r\n    }\r\n\r\n    @Override\r\n    public boolean compare() {\r\n        return new DefaultFieldsComparator(left, right).compare();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java b/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java
+--- a/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java	(date 1747685443925)
+@@ -1,8 +1,9 @@
+ package org.fs.comparator.comparators.comparator;
+ 
+-import org.fs.comparator.comparators.comparator.types.different.DifferentFieldsComparator;
+-import org.fs.comparator.comparators.comparator.types.matching.DefaultFieldsComparator;
+-import org.fs.comparator.comparators.comparator.types.matching.MatchingFieldsComparator;
++import org.fs.comparator.comparators.comparator.types.comparator.DefaultFieldsComparator;
++import org.fs.comparator.comparators.comparator.types.comparator.DifferentFieldsComparator;
++import org.fs.comparator.comparators.comparator.types.comparator.ExcludeFieldsComparator;
++import org.fs.comparator.comparators.comparator.types.comparator.OnlyFieldsComparator;
+ 
+ final public class ObjectsComparator implements Terminatable {
+     private final Object left;
+@@ -17,12 +18,16 @@
+         this.right = right;
+     }
+ 
+-    public MatchingFieldsComparator compareMatchingNames() {
+-        return new MatchingFieldsComparator(left, right);
++    public ExcludeFieldsComparator excludeFields(String... fields) {
++        return new ExcludeFieldsComparator(left, right, fields);
++    }
++
++    public OnlyFieldsComparator onlyFields(String... fields) {
++        return new OnlyFieldsComparator(left, right, fields);
+     }
+ 
+-    public DifferentFieldsComparator compareDifferentNames() {
+-        return new DifferentFieldsComparator(left, right);
++    public DifferentFieldsComparator differentFieldsCompare(String... fields) {
++        return new DifferentFieldsComparator(left, right, fields);
+     }
+ 
+     @Override
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldContainer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldContainer.java b/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldContainer.java
+new file mode 100644
+--- /dev/null	(date 1747689465864)
++++ b/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldContainer.java	(date 1747689465864)
+@@ -0,0 +1,9 @@
++package org.fs.comparator.comparators.comparator.types.container;
++
++import java.lang.reflect.Field;
++
++/**
++ * Record that contains object and it's extracted field in one place
++ */
++public record RecordFieldContainer(Field field, Object object) {
++}
+Index: src/test/java/org/fs/comparator/ComparatorExceptionsTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.fs.comparator;\r\n\r\nimport org.fs.comparator.argument.ComparatorExceptionsNullBlankEmptyArguments;\r\nimport org.fs.comparator.comparators.exception.ComparatorSettingsException;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.params.ParameterizedTest;\r\nimport org.junit.jupiter.params.provider.ArgumentsSource;\r\n\r\nimport static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;\r\n\r\npublic class ComparatorExceptionsTest {\r\n\r\n    @ParameterizedTest\r\n    @DisplayName(\"Exclude. Exception on null, blank and empty fields\")\r\n    @ArgumentsSource(ComparatorExceptionsNullBlankEmptyArguments.class)\r\n    void test1(String[] exclude, Object left, Object right) {\r\n        assertThatThrownBy(() ->\r\n                ComparatorUtils.compareObjects(left, right)\r\n                        .compareMatchingNames()\r\n                        .excludeFields(exclude)\r\n                        .compare()\r\n        )\r\n                .isInstanceOf(ComparatorSettingsException.class)\r\n                .hasMessage(\"Exclude fields must not be null, empty, or blank\");\r\n    }\r\n\r\n    @ParameterizedTest\r\n    @DisplayName(\"Only. Exception on null, blank and empty fields\")\r\n    @ArgumentsSource(ComparatorExceptionsNullBlankEmptyArguments.class)\r\n    void test2(String[] exclude, Object left, Object right) {\r\n        assertThatThrownBy(() ->\r\n                ComparatorUtils.compareObjects(left, right)\r\n                        .compareMatchingNames()\r\n                        .onlyFields(exclude)\r\n                        .compare()\r\n        )\r\n                .isInstanceOf(ComparatorSettingsException.class)\r\n                .hasMessage(\"Only fields must not be null, empty, or blank\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java b/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java
+--- a/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java	(date 1747684758464)
+@@ -16,7 +16,6 @@
+     void test1(String[] exclude, Object left, Object right) {
+         assertThatThrownBy(() ->
+                 ComparatorUtils.compareObjects(left, right)
+-                        .compareMatchingNames()
+                         .excludeFields(exclude)
+                         .compare()
+         )
+@@ -30,7 +29,6 @@
+     void test2(String[] exclude, Object left, Object right) {
+         assertThatThrownBy(() ->
+                 ComparatorUtils.compareObjects(left, right)
+-                        .compareMatchingNames()
+                         .onlyFields(exclude)
+                         .compare()
+         )
+Index: src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.fs.comparator.comparators.util;\r\n\r\nimport java.lang.reflect.Field;\r\nimport java.util.Arrays;\r\nimport java.util.List;\r\nimport java.util.Set;\r\nimport java.util.stream.Collectors;\r\n\r\n/**\r\n * Utils for filter fields\r\n */\r\npublic class ExtractorUtils {\r\n    public static Object extractValue(Field field, Object object) {\r\n        try {\r\n            if(!field.canAccess(object)) {\r\n                field.setAccessible(true);\r\n            }\r\n\r\n            return field.get(object);\r\n        } catch (IllegalAccessException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n    }\r\n\r\n    public static Set<Field> extractFields(Object object) {\r\n        return Arrays.stream(object.getClass().getDeclaredFields())\r\n                .collect(Collectors.toSet());\r\n    }\r\n\r\n    public static Set<Field> extractFieldsExclude(Object object, Set<String> exclude) {\r\n        return Arrays.stream(object.getClass().getDeclaredFields())\r\n                .filter(e -> !exclude.contains(e.getName()))\r\n                .collect(Collectors.toSet());\r\n    }\r\n\r\n    public static Set<Field> extractFieldsOnly(Object object, Set<String> only) {\r\n        return Arrays.stream(object.getClass().getDeclaredFields())\r\n                .filter(e -> only.contains(e.getName()))\r\n                .collect(Collectors.toSet());\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java b/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java
+--- a/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java	(date 1747690956284)
+@@ -1,8 +1,10 @@
+ package org.fs.comparator.comparators.util;
+ 
++import org.fs.comparator.comparators.comparator.types.container.RecordFieldContainer;
++import org.fs.comparator.comparators.exception.FieldNotFoundException;
++
+ import java.lang.reflect.Field;
+ import java.util.Arrays;
+-import java.util.List;
+ import java.util.Set;
+ import java.util.stream.Collectors;
+ 
+@@ -10,6 +12,22 @@
+  * Utils for filter fields
+  */
+ public class ExtractorUtils {
++
++    /**
++     * Extract fields by record container
++     * @param record Record object with field
++     * @return Field value
++     */
++    public static Object extractValue(RecordFieldContainer record) {
++        return extractValue(record.field(), record.object());
++    }
++
++    /**
++     * Extract values form field
++     * @param field Field with value
++     * @param object Object with field
++     * @return Field value
++     */
+     public static Object extractValue(Field field, Object object) {
+         try {
+             if(!field.canAccess(object)) {
+@@ -22,20 +40,83 @@
+         }
+     }
+ 
++    /**
++     * Extract fields form object. Only declared fields
++     * @param object Object with specific fields
++     * @return Declared fields in object
++     */
+     public static Set<Field> extractFields(Object object) {
+         return Arrays.stream(object.getClass().getDeclaredFields())
+                 .collect(Collectors.toSet());
+     }
+ 
++    /**
++     * Extract fields with don't have such names
++     * @param object Object with fields
++     * @param exclude Names that fields shouldn't have
++     * @return Fields that don't have names in params
++     */
+     public static Set<Field> extractFieldsExclude(Object object, Set<String> exclude) {
+         return Arrays.stream(object.getClass().getDeclaredFields())
+                 .filter(e -> !exclude.contains(e.getName()))
+                 .collect(Collectors.toSet());
+     }
+ 
++    /**
++     * Extract fields with specific names
++     * @param object Object with fields
++     * @param only Fields names for extract
++     * @return Field with only names
++     */
+     public static Set<Field> extractFieldsOnly(Object object, Set<String> only) {
+         return Arrays.stream(object.getClass().getDeclaredFields())
+                 .filter(e -> only.contains(e.getName()))
+                 .collect(Collectors.toSet());
+     }
++
++    /**
++     * Find field in internal objects recursively
++     * @param path Field path using dots
++     * @param object Object for finding fields
++     * @return Found field
++     */
++    public static RecordFieldContainer extractFieldByPathRecursively(String path, Object object) {
++        String[] names = path.split("\\.");
++
++        if(names.length == 1) {
++            Field field = extractField(names[0], object);
++
++            return new RecordFieldContainer(field, object);
++        }
++
++        Object tempObj = object;
++
++        for (int i = 0; i < names.length; i++) {
++            Field field = extractField(names[i], tempObj);
++
++            if(i == names.length - 1) {
++                return new RecordFieldContainer(field, tempObj);
++            }
++
++            tempObj = extractValue(field, tempObj);
++        }
++
++        throw new FieldNotFoundException("Cannot find field with path: " + path);
++    }
++
++    /**
++     * Extract specific field by its name
++     * @param name Field name
++     * @param object Object contains field
++     * @return Field with name
++     */
++    public static Field extractField(String name, Object object) {
++        for (Field declaredField : object.getClass().getDeclaredFields()) {
++            if(declaredField.getName().equals(name)) {
++                return declaredField;
++            }
++        }
++
++        throw new FieldNotFoundException("Cannot find field with name: " + name);
++    }
+ }
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/matching/DefaultFieldsComparator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/DefaultFieldsComparator.java b/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DefaultFieldsComparator.java
+rename from src/main/java/org/fs/comparator/comparators/comparator/types/matching/DefaultFieldsComparator.java
+rename to src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DefaultFieldsComparator.java
+--- a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/DefaultFieldsComparator.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DefaultFieldsComparator.java	(date 1747689823961)
+@@ -1,6 +1,9 @@
+-package org.fs.comparator.comparators.comparator.types.matching;
++package org.fs.comparator.comparators.comparator.types.comparator;
+ 
+ import org.fs.comparator.comparators.comparator.Terminatable;
++import org.fs.comparator.comparators.comparator.types.FieldsComparator;
++import org.fs.comparator.comparators.comparator.types.container.RecordFieldContainer;
++import org.fs.comparator.comparators.comparator.types.container.RecordFieldsContainer;
+ import org.fs.comparator.comparators.util.ExtractorUtils;
+ 
+ final public class DefaultFieldsComparator extends FieldsComparator implements Terminatable {
+@@ -17,6 +20,9 @@
+         var lt = ExtractorUtils.extractFields(left);
+         var rt = ExtractorUtils.extractFields(right);
+ 
+-        return super.fieldsCompare(lt, rt, left, right);
++        return super.fieldsCompare(
++            new RecordFieldsContainer(lt, left),
++            new RecordFieldsContainer(rt, right)
++        );
+     }
+ }
+Index: src/test/java/org/fs/comparator/ComparatorTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.fs.comparator;\r\n\r\nimport org.fs.comparator.argument.ComparatorArguments;\r\nimport org.fs.comparator.argument.ExcludeFieldsArguments;\r\nimport org.fs.comparator.argument.OnlyFieldsArguments;\r\nimport org.junit.jupiter.api.DisplayName;\r\nimport org.junit.jupiter.params.ParameterizedTest;\r\nimport org.junit.jupiter.params.provider.ArgumentsSource;\r\n\r\nimport static org.assertj.core.api.AssertionsForClassTypes.assertThat;\r\n\r\n@SuppressWarnings(\"unused\")\r\npublic class ComparatorTest {\r\n\r\n    @ParameterizedTest\r\n    @DisplayName(\"Simple comparator\")\r\n    @ArgumentsSource(ComparatorArguments.class)\r\n    void test1(boolean expected, Object left, Object right) {\r\n        boolean actual = ComparatorUtils.compareObjects(left, right).compare();\r\n\r\n        assertThat(actual).isEqualTo(expected);\r\n    }\r\n\r\n    @ParameterizedTest\r\n    @DisplayName(\"Exclude fields\")\r\n    @ArgumentsSource(ExcludeFieldsArguments.class)\r\n    void test2(boolean expected, String[] exclude, Object left, Object right) {\r\n        boolean actual = ComparatorUtils.compareObjects(left, right)\r\n                .compareMatchingNames()\r\n                .excludeFields(exclude)\r\n                .compare();\r\n\r\n        assertThat(actual).isEqualTo(expected);\r\n    }\r\n\r\n    @ParameterizedTest\r\n    @DisplayName(\"Only fields\")\r\n    @ArgumentsSource(OnlyFieldsArguments.class)\r\n    void test3(boolean expected, String[] only, Object left, Object right) {\r\n        boolean actual = ComparatorUtils.compareObjects(left, right)\r\n                .compareMatchingNames()\r\n                .onlyFields(only)\r\n                .compare();\r\n\r\n        assertThat(actual).isEqualTo(expected);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/org/fs/comparator/ComparatorTest.java b/src/test/java/org/fs/comparator/ComparatorTest.java
+--- a/src/test/java/org/fs/comparator/ComparatorTest.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/test/java/org/fs/comparator/ComparatorTest.java	(date 1747690977342)
+@@ -4,6 +4,7 @@
+ import org.fs.comparator.argument.ExcludeFieldsArguments;
+ import org.fs.comparator.argument.OnlyFieldsArguments;
+ import org.junit.jupiter.api.DisplayName;
++import org.junit.jupiter.api.Test;
+ import org.junit.jupiter.params.ParameterizedTest;
+ import org.junit.jupiter.params.provider.ArgumentsSource;
+ 
+@@ -26,7 +27,6 @@
+     @ArgumentsSource(ExcludeFieldsArguments.class)
+     void test2(boolean expected, String[] exclude, Object left, Object right) {
+         boolean actual = ComparatorUtils.compareObjects(left, right)
+-                .compareMatchingNames()
+                 .excludeFields(exclude)
+                 .compare();
+ 
+@@ -38,10 +38,33 @@
+     @ArgumentsSource(OnlyFieldsArguments.class)
+     void test3(boolean expected, String[] only, Object left, Object right) {
+         boolean actual = ComparatorUtils.compareObjects(left, right)
+-                .compareMatchingNames()
+                 .onlyFields(only)
+                 .compare();
+ 
+         assertThat(actual).isEqualTo(expected);
+     }
++
++    @Test
++    void test4() {
++        var left = new Object() {
++            private String one = "1";
++            private Object two = new Object() {
++                private String one = "1";
++                private String two = "12";
++                private String three = "123";
++            };
++            private String three = "123";
++        };
++
++        var right = new Object() {
++            private String one = "1";
++            private String three = "12";
++        };
++
++        boolean actual = ComparatorUtils.compareObjects(left, right)
++                .differentFieldsCompare("two.two", "three")
++                .compare();
++
++        assertThat(actual).isEqualTo(true);
++    }
+ }
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/different/CompareDifferentFields.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/different/CompareDifferentFields.java b/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DifferentFieldsComparator.java
+rename from src/main/java/org/fs/comparator/comparators/comparator/types/different/CompareDifferentFields.java
+rename to src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DifferentFieldsComparator.java
+--- a/src/main/java/org/fs/comparator/comparators/comparator/types/different/CompareDifferentFields.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DifferentFieldsComparator.java	(date 1747690896370)
+@@ -1,35 +1,67 @@
+-package org.fs.comparator.comparators.comparator.types.different;
++package org.fs.comparator.comparators.comparator.types.comparator;
+ 
++import org.fs.comparator.comparators.comparator.Terminatable;
++import org.fs.comparator.comparators.comparator.types.container.DifferentFieldContainer;
++import org.fs.comparator.comparators.comparator.types.FieldsComparator;
++import org.fs.comparator.comparators.comparator.types.container.RecordFieldContainer;
+ import org.fs.comparator.comparators.exception.ComparatorSettingsException;
++import org.fs.comparator.comparators.util.ExtractorUtils;
+ 
+-import java.util.Arrays;
+-import java.util.List;
+-import java.util.Objects;
+-import java.util.Set;
++import java.lang.reflect.Field;
++import java.util.*;
+ 
+ /**
+  * Compare fields with not the save name
+  */
+-public class CompareDifferentFields {
++public final class DifferentFieldsComparator extends FieldsComparator implements Terminatable {
+     private final Object left;
+     private final Object right;
+ 
+     private final List<DifferentFieldContainer> onlyFields;
+ 
+-    public CompareDifferentFields(Object left, Object right, String... fields) {
++    public DifferentFieldsComparator(Object left, Object right, String... fields) {
++        validateFields(fields);
++
++        this.left = left;
++        this.right = right;
++        this.onlyFields = parseFields(fields);
++    }
++
++    private List<DifferentFieldContainer> parseFields(String[] fields) {
++        var fieldsList = new ArrayList<DifferentFieldContainer>();
++
++        for(int i = 0; i < fields.length / 2; i += 2) {
++            fieldsList.add(new DifferentFieldContainer(fields[i], fields[i + 1]));
++        }
++
++        return Collections.unmodifiableList(fieldsList);
++    }
++
++    private static void validateFields(String[] fields) {
+         Objects.requireNonNull(fields, "Fields mustn't be null");
+ 
+-        if(fields.length > 0 && fields.length % 2 == 0) {
++        if(fields.length > 0 && fields.length % 2 != 0) {
+             throw new ComparatorSettingsException("Fields count must be even and above zero");
+         }
+ 
+         if(Arrays.stream(fields).anyMatch(String::isBlank)) {
+             throw new ComparatorSettingsException("No fields must be blank");
+         }
++    }
+ 
+-        this.left = left;
+-        this.right = right;
++    @Override
++    public boolean compare() {
++        for (DifferentFieldContainer fieldPair : onlyFields) {
++            RecordFieldContainer lr = ExtractorUtils.extractFieldByPathRecursively(fieldPair.leftFieldPath(), left);
++            RecordFieldContainer rr = ExtractorUtils.extractFieldByPathRecursively(fieldPair.rightFieldPath(), right);
+ 
++            boolean result = super.fieldsCompare(lr, rr);
+ 
++            if(!result) {
++                return false;
++            }
++        }
++
++        return true;
+     }
+ }
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/matching/OnlyFieldsComparator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/OnlyFieldsComparator.java b/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/OnlyFieldsComparator.java
+rename from src/main/java/org/fs/comparator/comparators/comparator/types/matching/OnlyFieldsComparator.java
+rename to src/main/java/org/fs/comparator/comparators/comparator/types/comparator/OnlyFieldsComparator.java
+--- a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/OnlyFieldsComparator.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/OnlyFieldsComparator.java	(date 1747689962627)
+@@ -1,5 +1,7 @@
+-package org.fs.comparator.comparators.comparator.types.matching;
++package org.fs.comparator.comparators.comparator.types.comparator;
+ 
++import org.fs.comparator.comparators.comparator.types.FieldsComparator;
++import org.fs.comparator.comparators.comparator.types.container.RecordFieldsContainer;
+ import org.fs.comparator.comparators.exception.ComparatorSettingsException;
+ import org.fs.comparator.comparators.comparator.Terminatable;
+ import org.fs.comparator.comparators.util.ExtractorUtils;
+@@ -9,7 +11,7 @@
+ /**
+  * Compares only fields in settings
+  */
+-public class OnlyFieldsComparator extends FieldsComparator implements Terminatable {
++public final class OnlyFieldsComparator extends FieldsComparator implements Terminatable {
+     private final Object left;
+     private final Object right;
+ 
+@@ -30,6 +32,9 @@
+         var lf = ExtractorUtils.extractFieldsOnly(left, onlyFields);
+         var rf = ExtractorUtils.extractFieldsOnly(right, onlyFields);
+ 
+-        return fieldsCompare(lf, rf, left, right);
++        return fieldsCompare(
++            new RecordFieldsContainer(lf, left),
++            new RecordFieldsContainer(rf, right)
++        );
+     }
+ }
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java b/src/main/java/org/fs/comparator/comparators/comparator/types/FieldsComparator.java
+rename from src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java
+rename to src/main/java/org/fs/comparator/comparators/comparator/types/FieldsComparator.java
+--- a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/main/java/org/fs/comparator/comparators/comparator/types/FieldsComparator.java	(date 1747690404015)
+@@ -1,8 +1,11 @@
+-package org.fs.comparator.comparators.comparator.types.matching;
++package org.fs.comparator.comparators.comparator.types;
+ 
++import org.fs.comparator.comparators.comparator.types.container.RecordFieldContainer;
++import org.fs.comparator.comparators.comparator.types.container.RecordFieldsContainer;
+ import org.fs.comparator.comparators.util.ExtractorUtils;
+ 
+ import java.lang.reflect.Field;
++import java.util.List;
+ import java.util.Set;
+ import java.util.function.Function;
+ import java.util.stream.Collectors;
+@@ -14,37 +17,45 @@
+ 
+     /**
+      * Compare objects by fields
+-     * @param leftFields Left object fields for comparing
+-     * @param rightFields Right object fields for comparing
+-     * @param leftObject Left objets for comparing
+-     * @param rightObject Right objects for comparing
++     *
++     * @param leftRecord  Left record with object and fields
++     * @param rightRecord Right record with object and fields
+      * @return Result of comparing
+      */
+     protected boolean fieldsCompare(
+-            Set<Field> leftFields,
+-            Set<Field> rightFields,
+-            Object leftObject,
+-            Object rightObject
++            RecordFieldsContainer leftRecord,
++            RecordFieldsContainer rightRecord
+     ) {
+-        var rf = rightFields
++        var rf = rightRecord
++                .fields()
+                 .stream()
+                 .collect(Collectors.toMap(Field::getName, Function.identity()));
+ 
+-        for (Field leftField : leftFields) {
++        for (Field leftField : leftRecord.fields()) {
+             String leftFieldName = leftField.getName();
+-            Object leftValue = ExtractorUtils.extractValue(leftField, leftObject);
++            Object leftValue = ExtractorUtils.extractValue(leftField, leftRecord.object());
+ 
+-            if(!rf.containsKey(leftFieldName)) {
++            if (!rf.containsKey(leftFieldName)) {
+                 continue;
+             }
+ 
+-            Object rightValue = ExtractorUtils.extractValue(rf.get(leftFieldName), rightObject);
++            Object rightValue = ExtractorUtils.extractValue(rf.get(leftFieldName), rightRecord.object());
+ 
+-            if(!leftValue.equals(rightValue)) {
++            if (!leftValue.equals(rightValue)) {
+                 return false;
+             }
+         }
+ 
+         return true;
+     }
+-}
++
++    protected boolean fieldsCompare(
++            RecordFieldContainer leftRecord,
++            RecordFieldContainer rightRecord
++    ) {
++        Object lv = ExtractorUtils.extractValue(leftRecord.field(), leftRecord.object());
++        Object rv = ExtractorUtils.extractValue(rightRecord.field(), rightRecord.object());
++
++        return lv.equals(rv);
++    }
++}
+\ No newline at end of file
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java b/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/ExcludeFieldsComparator.java
+rename from src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java
+rename to src/main/java/org/fs/comparator/comparators/comparator/types/comparator/ExcludeFieldsComparator.java
+--- a/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/ExcludeFieldsComparator.java	(date 1747689914324)
+@@ -1,5 +1,7 @@
+-package org.fs.comparator.comparators.comparator.types.matching;
++package org.fs.comparator.comparators.comparator.types.comparator;
+ 
++import org.fs.comparator.comparators.comparator.types.FieldsComparator;
++import org.fs.comparator.comparators.comparator.types.container.RecordFieldsContainer;
+ import org.fs.comparator.comparators.exception.ComparatorSettingsException;
+ import org.fs.comparator.comparators.comparator.Terminatable;
+ import org.fs.comparator.comparators.util.ExtractorUtils;
+@@ -10,7 +12,7 @@
+ /**
+  * Compare fields excludes some of them
+  */
+-public class ExcludeFieldsComparator extends FieldsComparator implements Terminatable {
++public final class ExcludeFieldsComparator extends FieldsComparator implements Terminatable {
+     private final Object left;
+     private final Object right;
+ 
+@@ -31,6 +33,9 @@
+         Set<Field> lf = ExtractorUtils.extractFieldsExclude(left, excludeFields);
+         Set<Field> rf = ExtractorUtils.extractFieldsExclude(right, excludeFields);
+ 
+-        return super.fieldsCompare(lf, rf, left, right);
++        return super.fieldsCompare(
++            new RecordFieldsContainer(lf, left),
++            new RecordFieldsContainer(rf, right)
++        );
+     }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"2e87e0dc-2e7b-4ed0-8579-28a46106a678\" name=\"Changes\" comment=\"Exception checking\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/CompareDifferentFields.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldContainer.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentNamesComparator.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldsComparator.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingNamesComparator.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingFieldsComparator.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorUtilsTest.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorUtilsTest.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <task path=\"$PROJECT_DIR$\">\r\n          <activation />\r\n        </task>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"comparator\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"dev\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2vxN5V4VpEmIpbi1CDiBZ3DGoEw\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"Gradle.Build comparator.executor\": \"Run\",\r\n    \"JUnit.AllTests.executor\": \"Run\",\r\n    \"JUnit.TestClass.executor\": \"Run\",\r\n    \"JUnit.TestMethod.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"transfer\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/fs/Projects/comparator\",\r\n    \"project.structure.last.edited\": \"Project\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"settings.editor.selected.configurable\": \"reference.settingsdialog.project.gradle\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"JUnit.AllTests\">\r\n    <configuration name=\"AllTests\" type=\"JUnit\" factoryName=\"JUnit\">\r\n      <module name=\"comparator.test\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"17\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"org.fs.comparator\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"\" />\r\n      <option name=\"METHOD_NAME\" value=\"\" />\r\n      <option name=\"TEST_OBJECT\" value=\"package\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"TestMethod\" type=\"JUnit\" factoryName=\"JUnit\">\r\n      <module name=\"comparator.test\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"17\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"org.fs.comparator\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"org.fs.comparator.ComparatorUtilsTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test1\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Unnamed\" type=\"JUnit\" factoryName=\"JUnit\" nameIsGenerated=\"true\">\r\n      <module name=\"comparator.test\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"org.fs.comparator\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"\" />\r\n      <option name=\"METHOD_NAME\" value=\"\" />\r\n      <option name=\"TEST_OBJECT\" value=\"package\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"JUnit.AllTests\" />\r\n      <item itemvalue=\"JUnit.TestMethod\" />\r\n      <item itemvalue=\"JUnit.Unnamed\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"2e87e0dc-2e7b-4ed0-8579-28a46106a678\" name=\"Changes\" comment=\"\" />\r\n      <created>1745082583923</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1745082583923</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Parametrized tests\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1747514126567</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1747514126567</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Exception checking\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1747520569452</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1747520569452</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Parametrized tests\" />\r\n    <MESSAGE value=\"Exception checking\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Exception checking\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/.idea/workspace.xml	(date 1747690651209)
+@@ -5,17 +5,22 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="2e87e0dc-2e7b-4ed0-8579-28a46106a678" name="Changes" comment="Exception checking">
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/CompareDifferentFields.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldContainer.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldContainer.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/container/RecordFieldsContainer.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/exception/FieldNotFoundException.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/ObjectsComparator.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentNamesComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldsComparator.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingNamesComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingFieldsComparator.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/CompareDifferentFields.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DifferentFieldsComparator.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/container/DifferentFieldContainer.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldsComparator.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/DefaultFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/DefaultFieldsComparator.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/ExcludeFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/ExcludeFieldsComparator.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/FieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/FieldsComparator.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/MatchingFieldsComparator.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/matching/OnlyFieldsComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/comparator/types/comparator/OnlyFieldsComparator.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fs/comparator/comparators/util/ExtractorUtils.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorExceptionsTest.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorTest.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/fs/comparator/ComparatorUtilsTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -50,6 +55,7 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
++        <option value="Interface" />
+         <option value="Class" />
+       </list>
+     </option>
+@@ -70,26 +76,26 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "Gradle.Build comparator.executor": "Run",
+-    "JUnit.AllTests.executor": "Run",
+-    "JUnit.TestClass.executor": "Run",
+-    "JUnit.TestMethod.executor": "Run",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "git-widget-placeholder": "transfer",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/fs/Projects/comparator",
+-    "project.structure.last.edited": "Project",
+-    "project.structure.proportion": "0.0",
+-    "project.structure.side.proportion": "0.0",
+-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;Gradle.Build comparator.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.AllTests.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.TestClass.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.TestMethod.executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;transfer&quot;,
++    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/fs/Projects/comparator&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+   }
+-}]]></component>
+-  <component name="RunManager" selected="JUnit.AllTests">
++}</component>
++  <component name="RunManager" selected="JUnit.TestMethod">
+     <configuration name="AllTests" type="JUnit" factoryName="JUnit">
+       <module name="comparator.test" />
+       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+@@ -107,8 +113,8 @@
+       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+       <option name="ALTERNATIVE_JRE_PATH" value="17" />
+       <option name="PACKAGE_NAME" value="org.fs.comparator" />
+-      <option name="MAIN_CLASS_NAME" value="org.fs.comparator.ComparatorUtilsTest" />
+-      <option name="METHOD_NAME" value="test1" />
++      <option name="MAIN_CLASS_NAME" value="org.fs.comparator.ComparatorTest" />
++      <option name="METHOD_NAME" value="test4" />
+       <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+Index: src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldContainer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldContainer.java b/src/main/java/org/fs/comparator/comparators/comparator/types/container/DifferentFieldContainer.java
+rename from src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldContainer.java
+rename to src/main/java/org/fs/comparator/comparators/comparator/types/container/DifferentFieldContainer.java
+--- a/src/main/java/org/fs/comparator/comparators/comparator/types/different/DifferentFieldContainer.java	(revision f78b99969b08d85df373739661c33f2ca57feec7)
++++ b/src/main/java/org/fs/comparator/comparators/comparator/types/container/DifferentFieldContainer.java	(date 1747690403983)
+@@ -1,14 +1,7 @@
+-package org.fs.comparator.comparators.comparator.types.different;
++package org.fs.comparator.comparators.comparator.types.container;
+ 
+ /**
+- * Contains fields that will be used for comparing in {@link DifferentFieldsComparator}
++ * Contains fields that will be used for comparing
+  */
+-public class DifferentFieldContainer {
+-    private final String leftField;
+-    private final String rightField;
+-
+-    public DifferentFieldContainer(String leftField, String rightField) {
+-        this.leftField = leftField;
+-        this.rightField = rightField;
+-    }
++public record DifferentFieldContainer(String leftFieldPath, String rightFieldPath) {
+ }
